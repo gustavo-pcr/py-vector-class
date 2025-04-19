@@ -25,10 +25,13 @@ class Vector:
             return NotImplemented
         return Vector(self.x - other.x, self.y - other.y)
 
-    def __mul__(self, other: Union[int, float, "Vector"]) -> Union["Vector", float]:
+    def __mul__(
+        self, other: Union[int, float, "Vector"]
+    ) -> Union["Vector", float]:
         if isinstance(other, (int, float)):
-            return Vector(round(self.x * other, 2), 
-                          round(self.y * other, 2))
+            return Vector(
+                round(self.x * other, 2), round(self.y * other, 2)
+            )
         elif isinstance(other, Vector):
             dot_product = round(self.x * other.x + self.y * other.y, 4)
             return dot_product
@@ -49,8 +52,9 @@ class Vector:
         length = self.get_length()
         if length == 0:
             return Vector(0, 0)
-        return Vector(round(self.x / length, 2), 
-                      round(self.y / length, 2))
+        return Vector(
+            round(self.x / length, 2), round(self.y / length, 2)
+        )
 
     def angle_between(self, other: "Vector") -> int:
         dot_product = self.x * other.x + self.y * other.y
