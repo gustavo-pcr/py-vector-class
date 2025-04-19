@@ -2,9 +2,17 @@ import math
 
 
 class Vector:
-    def __init__(self, x: float, y: float) -> None:
-        self.x = round(x, 2)
-        self.y = round(y, 2)
+    def __init__(self, coord_x: float, coord_y: float) -> None:
+        self._coord_x = round(coord_x, 2)
+        self._coord_y = round(coord_y, 2)
+
+    @property
+    def x(self) -> float:
+        return self._coord_x
+
+    @property
+    def y(self) -> float:
+        return self._coord_y
 
     def __add__(self, other: object) -> "Vector":
         if not isinstance(other, Vector):
@@ -27,9 +35,9 @@ class Vector:
     def create_vector_by_two_points(
         cls, start_point: tuple, end_point: tuple
     ) -> "Vector":
-        x = end_point[0] - start_point[0]
-        y = end_point[1] - start_point[1]
-        return cls(x, y)
+        delta_x = end_point[0] - start_point[0]
+        delta_y = end_point[1] - start_point[1]
+        return cls(delta_x, delta_y)
 
     def get_length(self) -> float:
         return math.sqrt(self.x ** 2 + self.y ** 2)
@@ -44,17 +52,17 @@ class Vector:
         dot_product = self.x * other.x + self.y * other.y
         len_self = self.get_length()
         len_other = other.get_length()
+
         if len_self == 0 or len_other == 0:
             raise ValueError("Cannot calculate angle with zero-length vector.")
 
         cos_angle = dot_product / (len_self * len_other)
-        angle_radians = math.acos(max(-1, min(1, cos_angle)))
-        angle_degrees = math.degrees(angle_radians)
+        angle_degrees = math.degrees(math.acos(max(-1, min(1, cos_angle))))
         return round(angle_degrees)
 
     def get_angle(self) -> int:
-        y_axis = Vector(0, 1)
-        return self.angle_between(y_axis)
+        vertical_vector = Vector(0, 1)
+        return self.angle_between(vertical_vector)
 
     def rotate(self, degrees: int) -> "Vector":
         radians = math.radians(degrees)
