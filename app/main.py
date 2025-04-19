@@ -1,4 +1,5 @@
 import math
+from typing import Union
 
 
 class Vector:
@@ -14,27 +15,27 @@ class Vector:
     def y(self) -> float:
         return self._coord_y
 
-    def __add__(self, other: object) -> "Vector":
+    def __add__(self, other: "Vector") -> "Vector":
         if not isinstance(other, Vector):
             return NotImplemented
         return Vector(self.x + other.x, self.y + other.y)
 
-    def __sub__(self, other: object) -> "Vector":
+    def __sub__(self, other: "Vector") -> "Vector":
         if not isinstance(other, Vector):
             return NotImplemented
         return Vector(self.x - other.x, self.y - other.y)
 
-def __mul__(self, other: object) -> object:
-    if isinstance(other, (int, float)):
-        return Vector(round(self.x * other, 2), round(self.y * other, 2))
-    elif isinstance(other, Vector):
-        dot_product = round(self.x * other.x + self.y * other.y, 4)
-        return dot_product
-    return NotImplemented
+    def __mul__(self, other: Union[int, float, "Vector"]) -> Union["Vector", float]:
+        if isinstance(other, (int, float)):
+            return Vector(round(self.x * other, 2), round(self.y * other, 2))
+        elif isinstance(other, Vector):
+            dot_product = round(self.x * other.x + self.y * other.y, 4)
+            return dot_product
+        return NotImplemented
 
     @classmethod
     def create_vector_by_two_points(
-        cls, start_point: tuple, end_point: tuple
+        cls, start_point: tuple[float, float], end_point: tuple[float, float]
     ) -> "Vector":
         delta_x = end_point[0] - start_point[0]
         delta_y = end_point[1] - start_point[1]
