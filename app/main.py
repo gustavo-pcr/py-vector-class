@@ -25,7 +25,8 @@ class Vector:
             return NotImplemented
         return Vector(self.x - other.x, self.y - other.y)
 
-    def __mul__(self, other: Union[int, float, "Vector"]) -> Union["Vector", float]:
+    def __mul__(self, other: Union[int, float, "Vector"]
+    ) -> Union["Vector", float]:
         if isinstance(other, (int, float)):
             return Vector(round(self.x * other, 2), 
                           round(self.y * other, 2))
@@ -58,7 +59,7 @@ class Vector:
         len_other = other.get_length()
 
         if len_self == 0 or len_other == 0:
-            raise ValueError("Cannot calculate angle with zero-length vector.")
+            raise ValueError("Cannot calculate angle")
 
         cos_angle = dot_product / (len_self * len_other)
         angle_degrees = math.degrees(math.acos(max(-1, min(1, cos_angle))))
