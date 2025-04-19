@@ -26,16 +26,17 @@ class Vector:
         return Vector(self.x - other.x, self.y - other.y)
 
     def __mul__(
-        self, other: Union[int, float, "Vector"]
-    ) -> Union["Vector", float]:
-        if isinstance(other, (int, float)):
-            return Vector(
-                round(self.x * other, 2), round(self.y * other, 2)
-            )
-        elif isinstance(other, Vector):
-            dot_product = round(self.x * other.x + self.y * other.y, 4)
-            return dot_product
-        return NotImplemented
+    self, other: Union[int, float, "Vector"]
+) -> Union["Vector", float]:
+    if isinstance(other, (int, float)):
+        return Vector(
+            round(self.x * other, 2), round(self.y * other, 2)
+        )
+    elif isinstance(other, Vector):
+        dot_product = round(self.x * other.x + self.y * other.y, 3)  # Rounded to 3 decimal places
+        return dot_product
+    return NotImplemented
+
 
     @classmethod
     def create_vector_by_two_points(
