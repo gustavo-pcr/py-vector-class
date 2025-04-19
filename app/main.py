@@ -26,7 +26,7 @@ class Vector:
 
     def __mul__(self, other: object) -> object:
         if isinstance(other, (int, float)):
-            return Vector(round(self.x * other, 2), round(self.y * other, 2))
+            return Vector(round(self.x * other, 2), round(self.y * other, 4))
         if isinstance(other, Vector):
             return round(self.x * other.x + self.y * other.y, 4)
         return NotImplemented
